@@ -36,6 +36,13 @@ macro_rules! error {
 }
 
 #[macro_export]
+macro_rules! custom {
+    ($title:ident: $($tt:tt)+) => {
+        println!("\x1b[1m{}:\x1b[0m {}", stringify!($title), format_args!($($tt)+));
+    };
+}
+
+#[macro_export]
 macro_rules! custom_red {
     ($title:ident: $($tt:tt)+) => {
         println!("\x1b[1;31m{}:\x1b[0m {}", stringify!($title), format_args!($($tt)+));
