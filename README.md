@@ -1,5 +1,5 @@
-# simple-log
-**simple-log** is a simple logging library for Rust.
+# simple-logger
+**simple-logger** is a simple logging library for Rust.
 
 This logger doesn't implement the trait required by `log`.
 
