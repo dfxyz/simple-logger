@@ -41,6 +41,9 @@ macro_rules! custom {
         println!(concat!("\x1b[1m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
@@ -51,6 +54,9 @@ macro_rules! custom_red {
         println!(concat!("\x1b[1;31m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1;31m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1;31m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
@@ -61,6 +67,9 @@ macro_rules! custom_green {
         println!(concat!("\x1b[1;32m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1;32m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1;32m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
@@ -71,6 +80,9 @@ macro_rules! custom_yellow {
         println!(concat!("\x1b[1;33m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1;33m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1;33m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
@@ -81,6 +93,9 @@ macro_rules! custom_blue {
         println!(concat!("\x1b[1;34m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1;34m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1;34m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
@@ -91,6 +106,9 @@ macro_rules! custom_magenta {
         println!(concat!("\x1b[1;35m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1;35m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1;35m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
@@ -101,12 +119,14 @@ macro_rules! custom_cyan {
         println!(concat!("\x1b[1;36m", stringify!($title), ":\x1b[0m {}"), format_args!($($tt)+));
     };
     ($title:literal: $($tt:tt)+) => {
+        println!(concat!("\x1b[1;36m", $title, ":\x1b[0m {}"), format_args!($($tt)+));
+    };
+    ($title:expr; $($tt:tt)+) => {
         println!("\x1b[1;36m{}:\x1b[0m {}", $title, format_args!($($tt)+));
     };
 }
 
 #[cfg(test)]
-#[ignore]
 #[test]
 fn test() {
     info!("this is an info message");
@@ -128,6 +148,15 @@ fn test() {
     custom_blue!("test": "this is a custom blue message");
     custom_magenta!("test": "this is a custom magenta message");
     custom_cyan!("test": "this is a custom cyan message");
+    
+    let title = "titleExpr";
+    custom!(title; "this is a custom message");
+    custom_red!(title; "this is a custom red message");
+    custom_green!(title; "this is a custom green message");
+    custom_yellow!(title; "this is a custom yellow message");
+    custom_blue!(title; "this is a custom blue message");
+    custom_magenta!(title; "this is a custom magenta message");
+    custom_cyan!(title; "this is a custom cyan message");
     
     let n = 1;
     info!("this line will be overwritten");
